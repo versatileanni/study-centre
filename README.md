@@ -1,47 +1,87 @@
-# StudyCentre – Premium Library Management System
+# StudyCentre
 
-A full-stack web app to manage a 50-seat study centre with slot-based bookings, payments, and real-time seat availability.
+A full-stack study centre management web app built with **Next.js 16**, **React 19**, and **Tailwind CSS v4**.
+
+It supports two roles — **Admin** and **Student** — each with their own dedicated portal.
+
+---
+
+## Features
+
+### Admin
+- Manage students — add, edit, and delete records
+- Track seat bookings across 4 daily time slots (Morning, Midday, Afternoon, Evening)
+- View an interactive seat map with real-time occupancy
+- Record and monitor payments (paid, pending, overdue)
+- Analytics dashboard with slot utilization charts
+- Waitlist management
+
+### Student
+- View assigned seat and booked time slots
+- Check in / check out of sessions
+- Track payment status
+- Access account credentials and QR code
+
+### Chatbot Assistant
+A built-in chat assistant available to both roles:
+- **Students** can ask about their bookings, seat, payment status, slot timings, and account details
+- **Admins** can query live data in plain English — student counts, revenue, occupancy rates, overdue payments, and more
+
+---
 
 ## Tech Stack
-- **Next.js 16** (App Router) + **TypeScript**
-- **Tailwind CSS v4**
-- **localStorage** for data persistence (no backend setup needed)
-- **QRCode** for student QR generation
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| UI | React 19, Tailwind CSS v4 |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| Notifications | React Hot Toast |
+| Data | localStorage (with seed data) |
+| Language | TypeScript |
+
+---
 
 ## Getting Started
 
 ```bash
+# Install dependencies
 npm install
+
+# Run the development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Demo Login
-| Role    | Username  | Password    |
-|---------|-----------|-------------|
-| Admin   | `admin`   | `admin123`  |
-| Student | `student` | `student123`|
+---
 
-## Features
-- **Dashboard** – KPIs, slot utilization bars, seat overview grid
-- **Students** – Add/edit/delete, QR code generation per student
-- **Bookings** – Slot-based booking with double-booking prevention, check-in/out
-- **Seat Map** – Live visual grid with 4 slot indicators per seat (🟢🔴🟡), waitlist
-- **Payments** – Track paid/pending/overdue, mark as paid
-- **Analytics** – Slot popularity, daily trends, revenue breakdown
+## Default Login Credentials
 
-## Seat Layout
-| Type         | IDs       | Count |
-|--------------|-----------|-------|
-| Premium      | C1–C10    | 10    |
-| Semi-Private | S1–S15    | 15    |
-| Standard     | A1–A25    | 25    |
+| Role | Username | Password |
+|---|---|---|
+| Admin | `admin` | `admin123` |
+| Student | phone number (e.g. `9876543210`) | `SC@` + last 4 digits (e.g. `SC@3210`) |
 
-## Time Slots
-| Slot      | Time             |
-|-----------|------------------|
-| Morning   | 9:00 AM – 12:00 PM |
-| Midday    | 12:00 PM – 3:00 PM |
-| Afternoon | 3:00 PM – 6:00 PM  |
-| Evening   | 6:00 PM – 9:00 PM  |
+---
+
+## Project Structure
+
+```
+app/
+  (app)/          # Authenticated routes (dashboard, students, bookings, etc.)
+  login/          # Login page
+components/
+  ChatBot.tsx     # Role-aware chat assistant
+  Sidebar.tsx     # Navigation sidebar
+  Modal.tsx       # Reusable modal
+  StatCard.tsx    # Dashboard stat cards
+  SlotBadge.tsx   # Time slot badges
+lib/
+  auth.tsx        # Auth context and login logic
+  store.ts        # Central data store (localStorage)
+  useStore.ts     # React hook for store
+  types.ts        # Shared TypeScript types
+  seats.ts        # Seat layout data
+```
